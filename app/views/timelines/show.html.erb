@@ -1,0 +1,6 @@
+<% @timelines.objective each do |timeline| %>
+  <div class = ""></div>
+ <%= timeline.name %>
+ <%= attachment_image_tag objective, :profile_image, size: "150x150", fallback: "no_image.jpg" %>
+ <%= attachment_image_tag timeline, :image, size: "150x150", fallback: "no_image.jpg" %>
+<% end %>

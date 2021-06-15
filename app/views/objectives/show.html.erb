@@ -1,0 +1,40 @@
+<div class = "container">
+  <div class = "row">
+    <!--ユーザー詳細を表示-->
+    <div class = "col-md-3">
+      <%= @users.name %>
+      <%= attachment_image_tag @users, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+      <%= @users.introduction %>
+      <p>フォロー数：<%= @users.following_user.count %></p>
+      <p>フォロワー数：<%= @users.follower_user.count %></p>
+      <p>いいね数：<%= @objective.favorites.count %></p>
+      <p>コメント件数：<%= @objective.objective_comments.count %></p>
+      <%# if user_signed_in? && @user.id == current_user.id %>
+        <td><%#= link_to "Edit",edit_book_path,class: "btn btn-success" %></td>
+        <td><%#= link_to "Destroy",book_path(@books.id),method: :delete, data: {confirm: "Are you sure?"},class: "btn btn-danger" %></td>
+      <%# else %>
+        <td></td>
+      <%# end %>
+    </div>
+    <!--投稿詳細を表示-->
+    <div class = "col-md-6">
+      <% if @objective.favorited_by?(current_user) %>
+        <p>
+          <%= link_to objective_favorites_path(@objective.id), method: :delete do %>
+            ♥<%= @objective.favorites.count %>
+          <% end %>
+        </p>
+          <% else %>
+        <p>
+          <%= link_to objective_favorites_path(@objective.id), method: :post do %>
+            ♡<%= @objective.favorites.count %>
+          <% end %>
+        </p>
+      <% end %>
+      <%= form_with(model:[@objective, @objective_comment], local: true) do |f| %>
+        <%= f.text_area :comment,size: "80x5"  %><br>
+        <%= f.submit "送信" %>
+      <% end %>
+    </div>
+  </div>
+</div>

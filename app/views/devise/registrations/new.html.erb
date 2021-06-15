@@ -1,0 +1,31 @@
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="field">
+    <%= f.label :お名前 or ニックネーム %><span style = "color: red; font-size: 12px; margin-left: 10px;">(必須)</span><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :メールアドレス %><span style = "color: red; font-size: 12px; margin-left: 10px;">(必須)</span><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %><span style = "color: red; font-size: 12px; margin-left: 10px;">(必須)</span>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード確認用 %><span style = "color: red; font-size: 12px; margin-left: 10px;">(必須)</span><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>
+
+<P>登録済みの方は<%= render "devise/shared/links" %></P>

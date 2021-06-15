@@ -1,0 +1,33 @@
+<main>
+  <div class = "container">
+    <h3>~ New Post ~</h3>
+    <div class = "row">
+      <!--題名、投稿内容、画像、金額を表示-->
+      <%= form_with model: @objective, url: objectives_path, local:true do |f| %>
+        <table>
+          <tr>
+            <td>題名</td>
+            <td><%= f.text_field :title, size: "40x5", autofocus: true, id:"inputTitle" %></td>
+          </tr>
+          <tr>
+            <td>貯金する上で意識したこと</td>
+            <td><%= f.text_area :content, size: "40x5", autofocus: true, id:"inputContent" %></td>
+          </tr>
+          <tr>
+            <td>画像</td>
+            <td><%= f.attachment_field :image, placeholder: "商品画像" %></td>
+          </tr>
+          <tr>
+            <td>金額</td>
+            <td><%= f.text_field :money, size: "40x5", autofocus: true, id:"inputMoney" %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.submit '投稿', class: "btn btn-secondary" %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 1
+  rent: 1
+  food: 1
+  waterway_light_heat_fee: 1
+  life: 1
+  postage: 1
+  medical: 1
+  entertainment: 1
+  others: 1
+
+two:
+  total: 1
+  rent: 1
+  food: 1
+  waterway_light_heat_fee: 1
+  life: 1
+  postage: 1
+  medical: 1
+  entertainment: 1
+  others: 1
