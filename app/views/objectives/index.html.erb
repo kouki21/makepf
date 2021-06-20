@@ -2,14 +2,20 @@
   <div class = "row">
     <!--投稿一覧を表示-->
     <div class = "col-md-6 offset-md-2">
-      
+      <% @objectives.each do |objective| %>
+        <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
+        <%= objective.title %>
+        <%= objective.content %>
+        ¥<%= objective.money %>
+      <% end %>
     </div>
     <!--いいね数でランキングを表示-->
     <div class = "col-md-4">
       <% @objective.each do |objective| %>
-        <%= objective.name %>
-        
-        <%= attachment_image_tag objective, :profile_image, size: "150x150", fallback: "no_image.jpg" %>
+        <%= @user.name %>
+        <%= attachment_image_tag @user, :profile_image, size: "150x150", fallback: "no_image.jpg" %>
+        <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
+        <%= objective.title %>
       <% end %>
     </div>
   </div>

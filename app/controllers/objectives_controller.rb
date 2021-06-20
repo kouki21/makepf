@@ -7,6 +7,7 @@ class ObjectivesController < ApplicationController
   def index
     @objectives = Objective.all
     @objective = Objective.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
+    @user = User.find(params[:id])
   end
 
   def show

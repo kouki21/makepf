@@ -1,24 +1,43 @@
-# README
+# Money Share
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+何か欲しい、買いたいものがあったりした時や将来の為に貯金をしたいと思っているが欲求に負けてお金を使ってしまう時がありませんか？
 
-Things you may want to cover:
+それを防ぐ為に何が欲しい、何を買いたい、将来の貯金額など目標を宣言することで良い意味でプレッシャーになり実現できる可能性を上げます。又毎月貯金できた額や貯金できた秘訣などを共有することにより他の人の情報なども知るこ
+とができ、新たな発見になったりして貯金の楽しさを知ることができます。
 
-* Ruby version
+実現する為に毎月のお給料やお小遣いから他の支出を計算して貯金できる額を計算する機能も備わっています。
 
-* System dependencies
 
-* Configuration
+### サイトテーマ
+欲しい、買いたいものがある、将来のために貯金したいという目標があるけどできない人へのサポートをする。また使っているユーザー同士コメントやいいね、評価をする、秘訣などを共有することでモチベーションをあげて取り組むことができる環境を作ることを重視しています。
 
-* Database creation
+### テーマを選んだ理由
+将来結婚や車を買うかもしれない時のために今から少しずつでも貯金したいと思っているが他の欲求が出てきてつい買ってしまったりして目標に遠ざかってしまうことをやってしまうのを改善したい思いから作ってみようと思いました。
 
-* Database initialization
+### ターゲットユーザ
+老若男女誰でも何かの目標のためにお金を貯金したい方
 
-* How to run the test suite
+### 主な利用シーン
+- 何か欲しい、買いたいものがあったり将来の為に貯金をしたいと思った時
+- 他人の投稿に対していいねやコメントで貯金を応援する時
+- 毎月貯金できた金額、貯金できた秘訣等を投稿する時
+				
+				
 
-* Services (job queues, cache servers, search engines, etc.)
+## 設計書
+<...>
 
-* Deployment instructions
+## チャレンジ要素一覧
+<https://docs.google.com/spreadsheets/d/1UgK-6l38k5T81XjcTIn7CHnGRkB_sBXS5xQWAVhWmks/edit#gid=0>
 
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。

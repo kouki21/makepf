@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_091342) do
+ActiveRecord::Schema.define(version: 2021_06_20_082426) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_091342) do
   end
 
   create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "objective_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_091342) do
 
   create_table "objectives", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "like_id"
     t.integer "money"
     t.integer "image_id"
     t.text "content"
@@ -67,6 +70,13 @@ ActiveRecord::Schema.define(version: 2021_06_14_091342) do
   create_table "simulations", force: :cascade do |t|
     t.integer "target_amount"
     t.integer "target_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "timelines", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "objective_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

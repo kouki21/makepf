@@ -33,4 +33,8 @@ class User < ApplicationRecord
         def following?(user)
           following_user.include?(user)
         end
+
+        def all_following
+          Relationship.joins(followed: :objectives).select("objectives.*", "relationships.followed_id").where(follower_id: id).order("objectives.created_at DESC")
+        end
 end

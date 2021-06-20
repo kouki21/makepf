@@ -2,6 +2,7 @@ class CreateObjectives < ActiveRecord::Migration[5.2]
   def change
     create_table :objectives do |t|
       t.integer :user_id
+      t.integer :like_id
       t.integer :money
       t.integer :image_id
       t.text :content

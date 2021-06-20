@@ -9,15 +9,19 @@
       <p>フォロワー数：<%= @users.follower_user.count %></p>
       <p>いいね数：<%= @objective.favorites.count %></p>
       <p>コメント件数：<%= @objective.objective_comments.count %></p>
-      <%# if user_signed_in? && @user.id == current_user.id %>
-        <td><%#= link_to "Edit",edit_book_path,class: "btn btn-success" %></td>
-        <td><%#= link_to "Destroy",book_path(@books.id),method: :delete, data: {confirm: "Are you sure?"},class: "btn btn-danger" %></td>
+      <% if user_signed_in? && @user.id == current_user.id %>
+        <%= link_to "Edit",edit_user_path,class: "btn btn-success" %>
       <%# else %>
-        <td></td>
-      <%# end %>
+      <% end %>
     </div>
-    <!--投稿詳細を表示-->
+    <!--投稿一覧を表示-->
     <div class = "col-md-6">
+      <% @objective.each do |objective| %>
+        <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
+        <%= objective.title %>
+        <%= objective.content %>
+        ¥<%= objective.money %>
+      <% end %>
       <% if @objective.favorited_by?(current_user) %>
         <p>
           <%= link_to objective_favorites_path(@objective.id), method: :delete do %>
