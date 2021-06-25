@@ -7,6 +7,7 @@ class CreateObjectives < ActiveRecord::Migration[5.2]
       t.integer :image_id
       t.text :content
       t.string :title
+      t.boolean :is_achievement, default: true
       t.timestamps
     end
   end

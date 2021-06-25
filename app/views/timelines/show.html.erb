@@ -1,9 +1,19 @@
 <main>
-    <% @objectives.each do |objective| %>
-      <div class = ""></div>
-     <%= objective.name %>
-     <%= attachment_image_tag objective, :profile_image, size: "150x150", fallback: "no_image.jpg" %>
-     <%= objective.title %>
-     <%= attachment_image_tag objective, :image, size: "150x150", fallback: "no_image.jpg" %>
-    <% end %>
+  <% @objectives.each do | objective | %>
+    <div class = "">
+      <table>
+        <tr>
+          <th><p>objective.user.name:<%= objective.user.name %></p></th>
+          <td><p>objective.title:<%= objective.title %></p></td>
+        </tr>
+        <tr>
+          <th><p><%= attachment_image_tag objective.user, :profile_image, size: "50x50", fallback: "no_image.jpg" %></p></th>
+          <td><p><%= attachment_image_tag objective, :image, size: "150x150", fallback: "noimage.png" %></p></td>
+          <%= objective.content %>
+          ¥<%= objective.money %>
+        </tr>
+      </table>
+    </div>
+  <% end %>
 </main>
+

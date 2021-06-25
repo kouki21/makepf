@@ -1,0 +1,90 @@
+<div class = "Cost of living calculation" style = "width: 50%;">
+  <%= form_with model: @user do |f| %>
+    <h3>必要な生活費</h3>
+    <table>
+      <tr>
+        <td style = "text-align: left;">
+          <p>家賃（管理費・駐車場代など含む）：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :rent, id: "rent" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>食費：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :food, id: "food" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>水道・光熱費：</p>
+        </td style = "text-align: right;">
+        <td><%= f.text_field :Waterway_Light_Heat_Fee, id: "Waterway_Light_Heat_Fee" %>円</td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>生活用品（キッチン・お風呂・トイレ用品　など）：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :life, id: "life" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>通信費（スマホ・ネット）：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :postage, id: "postage" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>保険・医療費：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :medical, id: "medical" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>娯楽費：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :entertainment, id: "entertainment" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>その他（ジム、ガソリン、ペット、ローン、通院費など）：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :others, id: "others" %>円
+        </td>
+      </tr>
+      <tr>
+        <td style = "text-align: left;">
+          <p>合計：</p>
+        </td>
+        <td style = "text-align: right;">
+          <%= f.text_field :result, id: "result", readonly: true %>円
+        </td>
+      </tr>
+    </table>
+  <% end %>
+</div>
+<script>
+$('input').change(function() {
+
+  label = ['#rent', '#food','#Waterway_Light_Heat_Fee', '#life', '#postage', '#medical', '#entertainment', '#others'];
+
+  result = 0;
+  label.forEach(function(element){
+    result += Number($(element).val()) | 0;
+  })
+
+  $('#result').val(result)
+});
+</script>

@@ -3,13 +3,18 @@
     <!--ユーザー詳細-->
     <div class = "container">
       <div class = "row">
-        <div class = "col-md-3">
+        <div class = "col-md-3 profile">
+          <h2 style = "padding-top: 30px;">Profile</h2>
           <%= @user.name %>
-          <%= attachment_image_tag @user, :profile_image, size: "150x150", fallback: "no_image.jpg" %>
+          <%= attachment_image_tag @user, :profile_image, size: "75x75", fallback: "no_image.jpg" %>
           <%= @user.introduction %>
           <%= link_to edit_user_path(@user.id) do %>
-            <i class="fas fa-cog" style = "color: #CCCCCC;"></i>
+            編集<i class="fas fa-cog" style = "color: #CCCCCC;"></i>
           <% end %>
+          <p>フォロー数：<%= @user.following_users.count %></p>
+          <p>フォロワー数：<%= @user.follower_users.count %></p>
+          <p>いいね数：<%= @user.favorites.count %></p>
+          <p>コメント件数：<%= @user.objective_comments.count %></p>
           <% unless @user == current_user %>
             <% if current_user.following?(user) %>
               <%= link_to 'フォロー外す',unfollow_path(user.id), method: :post %>
@@ -17,31 +22,28 @@
               <%= link_to 'フォローする',follow_path(user.id), method: :post %>
             <% end %>
           <% end %>
+          <%= link_to "新規投稿", new_objective_path, class: "new_objective_button" %>
+          <%= link_to "貯金額計算", savings_path, class: "savings_button" %>
         </div>
         <!--ログインしているユーザーの投稿一覧を表示-->
         <div class = "col-md-8 offset-md-1">
-          <table>
-            <tr>
-              <td>
-
-              </td>
-            </tr>
-          </table>
           <% @user.objectives.each do |objective| %>
-            <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
-            <%= objective.title %>
-            <%= objective.content %>
-            ¥<%= objective.money %>
-            <% if @objectives.favorited_by?(current_user) %>
+            <p><%= attachment_image_tag objective, :image, size: "300x150", fallback: "noimage.png" %></p>
+            <p><%= objective.title %></p>
+            <p><%= objective.content %></p>
+            <p>¥<%= objective.money %></p>
+            <% if objective.favorited_by?(current_user) %>
               <p>
-                <%= link_to objective_favorites_path(@objectives.id), method: :delete do %>
-                  ♥<%= @objectives.favorites.count %>
+                <%= link_to objective_favorites_path(objective.id), method: :delete do %>
+                  <i class="fas fa-thumbs-up"></i>
+                  <%= objective.favorites.count %>
                 <% end %>
               </p>
                 <% else %>
               <p>
-                <%= link_to objective_favorites_path(@objectives.id), method: :post do %>
-                  ♡<%= @objectives.favorites.count %>
+                <%= link_to objective_favorites_path(objective.id), method: :post do %>
+                  <i class="far fa-thumbs-up"></i>
+                  <%= objective.favorites.count %>
                 <% end %>
               </p>
             <% end %>

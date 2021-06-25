@@ -6,36 +6,36 @@ class ObjectivesController < ApplicationController
 
   def index
     @objectives = Objective.all
-    @objective = Objective.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
-    @user = User.find(params[:id])
+    @objective = Objective.find(Favorite.group(:objective_id).order('count(objective_id) desc').limit(5).pluck(:objective_id))
   end
 
   def show
     @objective = Objective.find(params[:id])
     @objective_comment = ObjectiveComment.new
-    @users = @objective.user
+    @user = @objective.user
   end
 
   def edit
-    @book = Book.find(params[:id])
+    @objective = Objective.find(params[:id])
   end
 
   def create
     @objective = Objective.new(objective_params)
     @objective.user_id = current_user.id
     if @objective.save
-      redirect_to objective_path(@objective.id), notice: 'You have created book successfully'
+      redirect_to objective_path(@objective.id)
     else
       @user = current_user
+      @objectives = Objective.all
       render "index"
     end
   end
 
   def update
-    @objective = Book.find(params[:id])
+    @objective = Objective.find(params[:id])
     @objective.update(objective_params)
-    if @book.save
-      redirect_to book_path(@book.id), notice: 'You have updated book successfully'
+    if @objective.save
+      redirect_to objective_path(@objective.id)
     else
       render "edit"
     end
@@ -44,7 +44,7 @@ class ObjectivesController < ApplicationController
   def destroy
     objective = Objective.find(params[:id])
     objective.destroy
-    redirect_to objective_path(@objective.id)
+    redirect_to user_path(@user.id)
   end
 
   private

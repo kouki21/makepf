@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_06_20_082426) do
     t.integer "image_id"
     t.text "content"
     t.string "title"
+    t.boolean "is_achievement", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,5 +1,5 @@
 class ObjectiveCommentsController < ApplicationController
-  
+
   def create
     @objective_comment = ObjectiveComment.new
     @objective = Objective.find(params[:objective_id])
@@ -9,12 +9,12 @@ class ObjectiveCommentsController < ApplicationController
     comment.save
     redirect_back(fallback_location: root_path)
   end
-  
+
   def destroy
     ObjectiveComment.find_by(id: params[:id], objective_id: params[:objective_id]).destroy
     redirect_back(fallback_location: root_path)
   end
-  
+
   private
   def objective_comment_params
     params.require(:objective_comment).permit(:comment)

@@ -1,15 +1,16 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.background-image {
-  background-image: url("top.jpg");
+.bg-i {
+  background-image:image-url("top.jpg");
   height: 800px;
   background-size: cover;
   background-color:rgba(255,255,255,0.5);
   background-blend-mode:lighten;
-}
-
-h1{
-  color: white;
-  possition: center;
+  // ↑背景画像を少し明るめにする
+  .top-title{
+    color: white;
+    font-size: 80px;
+    padding: 100px 0 0 100px;
+  }
 }

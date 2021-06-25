@@ -2,42 +2,74 @@
   <div class = "row">
     <!--ユーザー詳細を表示-->
     <div class = "col-md-3">
-      <%= @users.name %>
-      <%= attachment_image_tag @users, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
-      <%= @users.introduction %>
-      <p>フォロー数：<%= @users.following_user.count %></p>
-      <p>フォロワー数：<%= @users.follower_user.count %></p>
+      <%= @user.name %>
+      <%= attachment_image_tag @user, :profile_image, size: "75x75", fallback: "no_image.jpg" %>
+      <%= @user.introduction %>
+      <p>フォロー数：<%= @user.following_users.count %></p>
+      <p>フォロワー数：<%= @user.follower_users.count %></p>
       <p>いいね数：<%= @objective.favorites.count %></p>
       <p>コメント件数：<%= @objective.objective_comments.count %></p>
       <% if user_signed_in? && @user.id == current_user.id %>
-        <%= link_to "Edit",edit_user_path,class: "btn btn-success" %>
-      <%# else %>
+        <%= link_to edit_user_path(@user.id) do %>
+            編集<i class="fas fa-cog" style = "color: #CCCCCC;"></i>
+          <% end %>
+        <% unless @user == current_user %>
+          <% if current_user.following?(@user) %>
+            <%= link_to 'フォロー外す',unfollow_path(@user.id), method: :post %>
+          <% else %>
+            <%= link_to 'フォローする',follow_path(@user.id), method: :post %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
-    <!--投稿一覧を表示-->
+    <!--投稿詳細を表示-->
     <div class = "col-md-6">
-      <% @objective.each do |objective| %>
-        <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
-        <%= objective.title %>
-        <%= objective.content %>
-        ¥<%= objective.money %>
+      <%= attachment_image_tag @objective, :image, size: "500x150", fallback: "noimage.png" %>
+      <p><%= @objective.title %></p>
+      <p><%= @objective.content %></p>
+      <p>¥<%= @objective.money %></p>
+      <% if @objective.is_achievement == true %>
+        <div style = "color: #339900;">
+          新規
+        </div>
+      <% else %>
+        <div style = "color: #9ba5a0;">
+          貯金達成
+        </div>
       <% end %>
       <% if @objective.favorited_by?(current_user) %>
         <p>
           <%= link_to objective_favorites_path(@objective.id), method: :delete do %>
-            ♥<%= @objective.favorites.count %>
+            <i class="fas fa-thumbs-up"></i>
+            <%= @objective.favorites.count %>
           <% end %>
         </p>
           <% else %>
         <p>
           <%= link_to objective_favorites_path(@objective.id), method: :post do %>
-            ♡<%= @objective.favorites.count %>
+             <i class="far fa-thumbs-up"></i>
+             <%= @objective.favorites.count %>
           <% end %>
         </p>
       <% end %>
+
+      <% @objective.objective_comments.each do |objective_comment| %>
+        <p><%= objective_comment.user.name %>
+        <%= attachment_image_tag objective_comment.user, :profile_image, size: "75x75", fallback: "noimage.png" %></p>
+        <p><%= objective_comment.comment %></p>
+        <%# if user_signed_in? && @user.id == current_user.id %>
+          <%= link_to "削除",objective_objective_comment_path(@objective.id),method: :delete, data: {confirm: "本当に削除しますか?"},class: "btn btn-danger" %>
+        <%# end %>
+      <% end %>
+
+
       <%= form_with(model:[@objective, @objective_comment], local: true) do |f| %>
-        <%= f.text_area :comment,size: "80x5"  %><br>
+        <%= f.text_area :comment,size: "80x5",placeholder:"コメントを記入" %><br>
         <%= f.submit "送信" %>
+      <% end %>
+      <% if user_signed_in? && @user.id == current_user.id %>
+        <%= link_to "Edit",edit_objective_path,class: "btn btn-success" %>
+        <%= link_to "Destroy",objective_path(@objective.id),method: :delete, data: {confirm: "本当に削除しますか?"},class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>

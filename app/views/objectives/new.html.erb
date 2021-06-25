@@ -10,7 +10,7 @@
             <td><%= f.text_field :title, size: "40x5", autofocus: true, id:"inputTitle" %></td>
           </tr>
           <tr>
-            <td>貯金する上で意識したこと</td>
+            <td></td>
             <td><%= f.text_area :content, size: "40x5", autofocus: true, id:"inputContent" %></td>
           </tr>
           <tr>
@@ -26,6 +26,10 @@
               <%= f.submit '投稿', class: "btn btn-secondary" %>
             </td>
           </tr>
+          <%= f.radio_button :is_achievement, :true %>
+          <%= f.label :is_achievement, "新規", {value: :true, style: "display: inline-block;"} %>
+          <%= f.radio_button :is_achievement, :false %>
+          <%= f.label :is_achievement, "貯金達成", {value: :false, style: "display: inline-block;"} %>
         </table>
       <% end %>
     </div>

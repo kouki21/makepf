@@ -3,19 +3,50 @@
     <!--投稿一覧を表示-->
     <div class = "col-md-6 offset-md-2">
       <% @objectives.each do |objective| %>
-        <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
-        <%= objective.title %>
-        <%= objective.content %>
-        ¥<%= objective.money %>
+        <%= link_to objective_path(objective.id) do %>
+          <table>
+            <tr>
+              <td><%= objective.user.name %>
+              <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></td>
+            </tr>
+            <tr>
+              <td><%= attachment_image_tag objective, :image, size: "500x150", fallback: "noimage.png" %></td>
+            </tr>
+            <tr>
+              <td><%= objective.title %></td>
+            </tr>
+            <tr>
+              <td><%= objective.content %></td>
+            </tr>
+            <tr>
+              <td>¥<%= objective.money %></td>
+            </tr>
+            <tr>
+              <td><% if @item.is_active == true %>
+                  <div style = "color: #339900;">
+                    新規
+                  </div>
+                <% else %>
+                  <div style = "color: #9ba5a0;">
+                    貯金達成
+                  </div>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
       <% end %>
     </div>
     <!--いいね数でランキングを表示-->
-    <div class = "col-md-4">
-      <% @objective.each do |objective| %>
-        <%= @user.name %>
-        <%= attachment_image_tag @user, :profile_image, size: "150x150", fallback: "no_image.jpg" %>
-        <%= attachment_image_tag objective, :image, size: "200x200", fallback: "no_image.jpg" %>
+    <div class = "col-md-3 offset-md-1">
+      <h4 style = "padding-top: 30px;">いいね数ランキング</h4>
+      <% @objective.each.with_index(1) do |objective,i| %>
+        <p>第<%= i %>位</p>
+        <%= objective.user.name %>
+        <%= attachment_image_tag objective.user, :profile_image, size: "35x35", fallback: "no_image.jpg" %>
         <%= objective.title %>
+        <%= attachment_image_tag objective, :image, size: "75x75", fallback: "noimage.png" %>
+        <p>いいね数：<%= objective.favorites.count %></p>
       <% end %>
     </div>
   </div>

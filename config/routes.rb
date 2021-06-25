@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get "home/about" => "homes#about" , as: "about"
 
-  resources :users, only: [:show, :edit, :update, :destroy] do
-    get "follower" => "relationships#follower" , as: "follower"
-    get "followed" => "relationships#followed" , as: "followed"
-  end
+  resources :users, only: [:show, :edit, :update, :destroy]
 
   post "follow/:id" => "relationships#follow" , as: "follow"
   post "unfollow/:id" => "relationships#unfollow" , as: "unfollow"
@@ -17,7 +14,9 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
 
-  resource :savings, only: [:index, :show]
+  resource :simulation, only: [:show]
+
+  resource :savings, only: [:show]
 
   resource :timeline, only: [:show]
 end
