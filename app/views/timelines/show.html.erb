@@ -26,37 +26,39 @@
         <% @objectives.each do | objective | %>
           <%= link_to objective_path(objective.id),class: "font-color" do %>
             <div class = "timeline_list" style = "border: 1px solid #e6e3dc; padding: 0 0 0 5px;">
-               <table>
-                  <tr>
-                    <td><%= objective.user.name %>
-                    <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></td>
-                  </tr>
-                  <tr>
-                    <td><%= attachment_image_tag objective, :image, size: "530x170", fallback: "noimage.png" %></td>
-                  </tr>
-                  <tr>
-                    <td><%= objective.title %></td>
-                  </tr>
-                  <tr>
-                    <td><%= objective.content %></td>
-                  </tr>
-                  <tr>
-                    <td>¥<%= objective.money %></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <% if objective.is_achievement == true %>
-                        <div style = "color: #339900;">
-                          新規
-                        </div>
-                      <% else %>
-                        <div style = "color: #9ba5a0;">
-                          貯金達成
-                        </div>
-                      <% end %>
-                    </td>
-                  </tr>
-                </table>
+              <table>
+                <tr>
+                  <td>
+                    <%= objective.user.name %>
+                    <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><%= attachment_image_tag objective, :image, size: "530x170", fallback: "noimage.png" %></td>
+                </tr>
+                <tr>
+                  <td><%= objective.title %></td>
+                </tr>
+                <tr>
+                  <td><%= objective.content %></td>
+                </tr>
+                <tr>
+                  <td>¥<%= objective.money %></td>
+                </tr>
+                <tr>
+                  <td>
+                    <% if objective.is_achievement == true %>
+                      <div style = "color: #339900;">
+                        新規
+                      </div>
+                    <% else %>
+                      <div style = "color: #9ba5a0;">
+                        貯金達成
+                      </div>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
             </div>
           <% end %>
         <% end %>

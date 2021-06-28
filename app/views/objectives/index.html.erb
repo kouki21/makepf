@@ -38,8 +38,10 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><%= objective.user.name %>
-                    <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></td>
+                    <td>
+                      <%= objective.user.name %>
+                      <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %>
+                    </td>
                   </tr>
                   <tr>
                     <td><%= attachment_image_tag objective, :image, size: "530x170", fallback: "noimage.png" %></td>

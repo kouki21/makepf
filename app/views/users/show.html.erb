@@ -32,16 +32,16 @@
           <% @user.objectives.order(id: "DESC").each do |objective| %>
             <div class = "user_objective_box" style = "border: 1px solid #e6e3dc;">
               <p style = "padding-top: 10px;">
-                  <% if objective.is_achievement == true %>
-                    <div style = "color: #339900;">
-                      新規
-                    </div>
-                  <% else %>
-                    <div style = "color: #339900;">
-                      貯金達成
-                    </div>
-                  <% end %>
-                </p>
+                <% if objective.is_achievement == true %>
+                  <div style = "color: #339900;">
+                    新規
+                  </div>
+                <% else %>
+                  <div style = "color: #339900;">
+                    貯金達成
+                  </div>
+                <% end %>
+              </p>
               <p>
                 <%= attachment_image_tag objective, :image, size: "400x200", fallback: "noimage.png" %>
               </p>
