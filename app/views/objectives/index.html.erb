@@ -1,53 +1,97 @@
-<div class = "container">
-  <div class = "row">
-    <!--投稿一覧を表示-->
-    <div class = "col-md-6 offset-md-2">
-      <% @objectives.each do |objective| %>
-        <%= link_to objective_path(objective.id) do %>
-          <table>
-            <tr>
-              <td><%= objective.user.name %>
-              <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></td>
-            </tr>
-            <tr>
-              <td><%= attachment_image_tag objective, :image, size: "500x150", fallback: "noimage.png" %></td>
-            </tr>
-            <tr>
-              <td><%= objective.title %></td>
-            </tr>
-            <tr>
-              <td><%= objective.content %></td>
-            </tr>
-            <tr>
-              <td>¥<%= objective.money %></td>
-            </tr>
-            <tr>
-              <td><% if @item.is_active == true %>
-                  <div style = "color: #339900;">
-                    新規
-                  </div>
-                <% else %>
-                  <div style = "color: #9ba5a0;">
-                    貯金達成
-                  </div>
-                <% end %>
-              </td>
-            </tr>
-          </table>
+<main>
+  <div class = "container" style = "margin: 0 auto; background-color: :#FFFFF;">
+    <div class = "row">
+      <!--ユーザー詳細表示-->
+      <div class = "col-md-3">
+        <h2 style = "padding-top: 30px; border-bottom: 10px solid #e6e3dc;">Profile</h2>
+        <p><%= @user.name %></p>
+        <p>
+          <%= attachment_image_tag @user, :profile_image, size: "75x75", fallback: "no_image.jpg", class: "profile_image" %>
+        </p>
+        <p><%= @user.introduction %></p>
+        <p><%= link_to "編集", edit_user_path(@user.id), class: "edit_button" %></p>
+        <p>フォロー数：<%= @user.following_users.count %></p>
+        <p>フォロワー数：<%= @user.follower_users.count %></p>
+        <p>いいね数：<%= @user.favorites.count %></p>
+        <p>コメント件数：<%= @user.objective_comments.count %></p>
+        <%= link_to "新規投稿", new_objective_path, class: "new_objective_button" %>
+        <%= link_to "貯金額計算", savings_path, class: "savings_button" %>
+      </div>
+      <!--投稿一覧を表示-->
+      <div class = "col-md-6">
+        <div class = "objective_list" style = "padding-top: 30px;">
+          <% @objectives.each do |objective| %>
+            <%= link_to objective_path(objective.id),class: "font-color" do %>
+              <div class = "objective_box" style = "border: 1px solid #dddddd; padding: 0 0 0 5px;">
+                <table>
+                  <tr>
+                    <td>
+                      <% if objective.is_achievement == true %>
+                        <div style = "color: #339900;">
+                          新規
+                        </div>
+                      <% else %>
+                        <div style = "color: #9ba5a0;">
+                          貯金達成
+                        </div>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><%= objective.user.name %>
+                    <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></td>
+                  </tr>
+                  <tr>
+                    <td><%= attachment_image_tag objective, :image, size: "530x170", fallback: "noimage.png" %></td>
+                  </tr>
+                  <tr>
+                    <td><%= objective.title %></td>
+                  </tr>
+                  <tr>
+                    <td><%= objective.content %></td>
+                  </tr>
+                  <tr>
+                    <td>¥<%= objective.money %></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%= link_to objective_path(objective.id) do %>
+                        <i class="far fa-comment"></i>
+                      <% end %>
+
+
+
+
+                      <% if objective.favorited_by?(current_user) %>
+                        <%= link_to objective_favorites_path(objective.id), method: :delete do %>
+                          <i class="fas fa-thumbs-up"></i>
+                          <%= objective.favorites.count %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to objective_favorites_path(objective.id), method: :post do %>
+                          <i class="far fa-thumbs-up"></i>
+                          <%= objective.favorites.count %>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <!--いいね数でランキングを表示-->
+      <div class = "col-md-3" style = "border: 3px solid #e6e3dc;">
+        <h4 style = "padding-top: 30px; border-bottom: 10px solid #e6e3dc;">いいね数ランキング</h4>
+        <% @objective.each.with_index(1) do |objective,i| %>
+          <p>第<%= i %>位 いいね数：<%= objective.favorites.count %></p>
+          <%= objective.user.name %>
+          <%= attachment_image_tag objective.user, :profile_image, size: "10x10", fallback: "no_image.jpg" %>
+          <p><%= objective.title %></p>
+          <%= attachment_image_tag objective, :image, size: "75x75", fallback: "noimage.png" %>
         <% end %>
-      <% end %>
-    </div>
-    <!--いいね数でランキングを表示-->
-    <div class = "col-md-3 offset-md-1">
-      <h4 style = "padding-top: 30px;">いいね数ランキング</h4>
-      <% @objective.each.with_index(1) do |objective,i| %>
-        <p>第<%= i %>位</p>
-        <%= objective.user.name %>
-        <%= attachment_image_tag objective.user, :profile_image, size: "35x35", fallback: "no_image.jpg" %>
-        <%= objective.title %>
-        <%= attachment_image_tag objective, :image, size: "75x75", fallback: "noimage.png" %>
-        <p>いいね数：<%= objective.favorites.count %></p>
-      <% end %>
+      </div>
     </div>
   </div>
-</div>
+</main>

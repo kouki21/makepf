@@ -8,9 +8,12 @@
   background-color:rgba(255,255,255,0.5);
   background-blend-mode:lighten;
   // ↑背景画像を少し明るめにする
-  .top-title{
+  .top-title ,.about-title{
     color: white;
     font-size: 80px;
     padding: 100px 0 0 100px;
+  }
+  .about{
+    color: #6c757d;
   }
 }

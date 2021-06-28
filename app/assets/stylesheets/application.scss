@@ -22,10 +22,27 @@ box-sizing: border-box;
 margin: 0;
 padding: 0;
 }
-  // border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
-  // width: 100px;  /* 縦横を同じ値にする */
-  // height: 100px;  /* 縦横を同じ値にする */
-  // object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+
+body{
+  background-color:#57728B;
+.container{
+ 	background-color:#F5F5F5;
+  height: 100%;
+ 	margin: 0 auto 0 auto;
+ 	}
+}
+
+ .profile_image ,.comment_profile_image{
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  width: 50px;  /* 縦横を同じ値にする */
+  height: 50px;  /* 縦横を同じ値にする */
+  object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+}
+
+.comment_profile_image{
+  margin-top: 10px;
+}
+
 .button{
 display       : inline-block;
 border-radius : 20%;
@@ -40,6 +57,7 @@ transition    : .3s;
 box-shadow    : 1px 1px 4px #666666;
 border        : 2px solid #999999;
 }
+
 .button:hover {
 box-shadow    : none;
 color         : #999999;

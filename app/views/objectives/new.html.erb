@@ -1,37 +1,36 @@
 <main>
   <div class = "container">
-    <h3>~ New Post ~</h3>
     <div class = "row">
       <!--題名、投稿内容、画像、金額を表示-->
-      <%= form_with model: @objective, url: objectives_path, local:true do |f| %>
-        <table>
-          <tr>
-            <td>題名</td>
-            <td><%= f.text_field :title, size: "40x5", autofocus: true, id:"inputTitle" %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><%= f.text_area :content, size: "40x5", autofocus: true, id:"inputContent" %></td>
-          </tr>
-          <tr>
-            <td>画像</td>
-            <td><%= f.attachment_field :image, placeholder: "商品画像" %></td>
-          </tr>
-          <tr>
-            <td>金額</td>
-            <td><%= f.text_field :money, size: "40x5", autofocus: true, id:"inputMoney" %></td>
-          </tr>
-          <tr>
-            <td>
-              <%= f.submit '投稿', class: "btn btn-secondary" %>
-            </td>
-          </tr>
-          <%= f.radio_button :is_achievement, :true %>
-          <%= f.label :is_achievement, "新規", {value: :true, style: "display: inline-block;"} %>
-          <%= f.radio_button :is_achievement, :false %>
-          <%= f.label :is_achievement, "貯金達成", {value: :false, style: "display: inline-block;"} %>
-        </table>
-      <% end %>
+      <div class = "col-md-8 offset-md-1">
+        <div class = "new_post" style = "padding-top: 30px;">
+          <%= form_with model: @objective, url: objectives_path, local:true do |f| %>
+            <h3>~ New Post ~</h3>
+            <div class = "new_post_radio_button">
+              <%= f.radio_button :is_achievement, :true %>
+              <%= f.label :is_achievement, "新規", {value: :true, style: "display: inline-block;"} %>
+              <%= f.radio_button :is_achievement, :false %>
+              <%= f.label :is_achievement, "貯金達成", {value: :false, style: "display: inline-block;"} %>
+            </div>
+            <div class = "form-group">題名<br>
+              <%= f.text_field :title, size: "80x5", autofocus: true, id:"inputTitle" %>
+            </div>
+            <div class = "form-group">新規：貯金したい理由など<br>
+              貯金達成：これから貯金する人へアドバイス
+              <%= f.text_area :content, size: "80x5", autofocus: true, id:"inputContent" %>
+            </div>
+            <div class = "form-group">画像<br>
+              <%= f.attachment_field :image, placeholder: "商品画像" %>
+            </div>
+            <div class = "form-group">金額
+              <%= f.text_field :money, size: "80x5", autofocus: true, id:"inputMoney" %>
+            </div>
+            <div class = "form-group">
+              <%= f.submit '投稿する', class: "btn btn-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </main>

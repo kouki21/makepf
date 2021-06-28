@@ -1,19 +1,67 @@
 <main>
-  <% @objectives.each do | objective | %>
-    <div class = "">
-      <table>
-        <tr>
-          <th><p>objective.user.name:<%= objective.user.name %></p></th>
-          <td><p>objective.title:<%= objective.title %></p></td>
-        </tr>
-        <tr>
-          <th><p><%= attachment_image_tag objective.user, :profile_image, size: "50x50", fallback: "no_image.jpg" %></p></th>
-          <td><p><%= attachment_image_tag objective, :image, size: "150x150", fallback: "noimage.png" %></p></td>
-          <%= objective.content %>
-          ¥<%= objective.money %>
-        </tr>
-      </table>
+  <div class = "container">
+    <div class = "row">
+      <!--ユーザー詳細-->
+      <div class = "col-md-3">
+        <h2 style = "padding-top: 30px; border-bottom: 10px solid #e6e3dc;">Profile</h2>
+        <p><%= @user.name %></p>
+        <p>
+          <%= attachment_image_tag @user, :profile_image, size: "75x75", fallback: "no_image.jpg", class: "profile_image" %>
+        </p>
+        <p><%= @user.introduction %></p>
+        <% if user_signed_in? && @user.id == current_user.id %>
+          <p><%= link_to "編集", edit_user_path(@user.id), class: "edit_button" %></p>
+        <% end %>
+        <p>フォロー数：<%= @user.following_users.count %></p>
+        <p>フォロワー数：<%= @user.follower_users.count %></p>
+        <p>いいね数：<%= @user.favorites.count %></p>
+        <p>コメント件数：<%= @user.objective_comments.count %></p>
+        <% if user_signed_in? && @user.id == current_user.id %>
+          <%= link_to "新規投稿", new_objective_path, class: "new_objective_button" %>
+          <%= link_to "貯金額計算", savings_path, class: "savings_button" %>
+        <% end %>
+      </div>
+      <!--タイムライン一覧-->
+      <div class = "col-md-6">
+        <% @objectives.each do | objective | %>
+          <%= link_to objective_path(objective.id),class: "font-color" do %>
+            <div class = "timeline_list" style = "border: 1px solid #e6e3dc; padding: 0 0 0 5px;">
+               <table>
+                  <tr>
+                    <td><%= objective.user.name %>
+                    <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></td>
+                  </tr>
+                  <tr>
+                    <td><%= attachment_image_tag objective, :image, size: "530x170", fallback: "noimage.png" %></td>
+                  </tr>
+                  <tr>
+                    <td><%= objective.title %></td>
+                  </tr>
+                  <tr>
+                    <td><%= objective.content %></td>
+                  </tr>
+                  <tr>
+                    <td>¥<%= objective.money %></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <% if objective.is_achievement == true %>
+                        <div style = "color: #339900;">
+                          新規
+                        </div>
+                      <% else %>
+                        <div style = "color: #9ba5a0;">
+                          貯金達成
+                        </div>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
 </main>
 

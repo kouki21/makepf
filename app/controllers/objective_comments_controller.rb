@@ -11,6 +11,7 @@ class ObjectiveCommentsController < ApplicationController
   end
 
   def destroy
+    # ObjectiveComment.find(id: params[:id]).destroy
     ObjectiveComment.find_by(id: params[:id], objective_id: params[:objective_id]).destroy
     redirect_back(fallback_location: root_path)
   end

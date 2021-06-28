@@ -5,8 +5,9 @@ class ObjectivesController < ApplicationController
   end
 
   def index
-    @objectives = Objective.all
-    @objective = Objective.find(Favorite.group(:objective_id).order('count(objective_id) desc').limit(5).pluck(:objective_id))
+    @objectives = Objective.all.order(id: "DESC")
+    @objective = Objective.find(Favorite.group(:objective_id).order('count(objective_id) desc').limit(3).pluck(:objective_id))
+    @user = current_user
   end
 
   def show
@@ -44,7 +45,7 @@ class ObjectivesController < ApplicationController
   def destroy
     objective = Objective.find(params[:id])
     objective.destroy
-    redirect_to user_path(@user.id)
+    redirect_to user_path(current_user.id)
   end
 
   private

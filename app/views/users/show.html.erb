@@ -1,15 +1,15 @@
 <main>
   <div class = "bg_i">
-    <!--ユーザー詳細-->
     <div class = "container">
       <div class = "row">
-        <div class = "col-md-3 profile">
-          <h2 style = "padding-top: 30px;">Profile</h2>
-          <%= @user.name %>
-          <%= attachment_image_tag @user, :profile_image, size: "75x75", fallback: "no_image.jpg" %>
-          <%= @user.introduction %>
-          <%= link_to edit_user_path(@user.id) do %>
-            編集<i class="fas fa-cog" style = "color: #CCCCCC;"></i>
+        <div class = "col-md-3">
+          <!--ユーザー詳細-->
+          <h2 style = "padding-top: 30px; border-bottom: 10px solid #e6e3dc;">Profile</h2>
+          <p><%= @user.name %></p>
+          <p><%= attachment_image_tag @user, :profile_image, size: "75x75", fallback: "no_image.jpg" %></p>
+          <p><%= @user.introduction %></p>
+          <% if user_signed_in? && @user.id == current_user.id %>
+            <p><%= link_to "編集", edit_user_path(@user.id), class: "edit_button" %></p>
           <% end %>
           <p>フォロー数：<%= @user.following_users.count %></p>
           <p>フォロワー数：<%= @user.follower_users.count %></p>
@@ -22,34 +22,53 @@
               <%= link_to 'フォローする',follow_path(user.id), method: :post %>
             <% end %>
           <% end %>
-          <%= link_to "新規投稿", new_objective_path, class: "new_objective_button" %>
-          <%= link_to "貯金額計算", savings_path, class: "savings_button" %>
+          <% if user_signed_in? && @user.id == current_user.id %>
+            <%= link_to "新規投稿", new_objective_path, class: "new_objective_button" %>
+            <%= link_to "貯金額計算", savings_path, class: "savings_button" %>
+          <% end %>
         </div>
         <!--ログインしているユーザーの投稿一覧を表示-->
-        <div class = "col-md-8 offset-md-1">
-          <% @user.objectives.each do |objective| %>
-            <p><%= attachment_image_tag objective, :image, size: "300x150", fallback: "noimage.png" %></p>
-            <p><%= objective.title %></p>
-            <p><%= objective.content %></p>
-            <p>¥<%= objective.money %></p>
-            <% if objective.favorited_by?(current_user) %>
+        <div class = "col-md-6">
+          <% @user.objectives.order(id: "DESC").each do |objective| %>
+            <div class = "user_objective_box" style = "border: 1px solid #e6e3dc;">
+              <p style = "padding-top: 10px;">
+                  <% if objective.is_achievement == true %>
+                    <div style = "color: #339900;">
+                      新規
+                    </div>
+                  <% else %>
+                    <div style = "color: #339900;">
+                      貯金達成
+                    </div>
+                  <% end %>
+                </p>
               <p>
-                <%= link_to objective_favorites_path(objective.id), method: :delete do %>
-                  <i class="fas fa-thumbs-up"></i>
-                  <%= objective.favorites.count %>
-                <% end %>
+                <%= attachment_image_tag objective, :image, size: "400x200", fallback: "noimage.png" %>
               </p>
-                <% else %>
-              <p>
-                <%= link_to objective_favorites_path(objective.id), method: :post do %>
-                  <i class="far fa-thumbs-up"></i>
-                  <%= objective.favorites.count %>
+              <p><%= objective.title %></p>
+              <p><%= objective.content %></p>
+              <p>¥<%= objective.money %></p>
+              <div style = "display: flex;">
+                <%= link_to objective_path(objective.id) do %>
+                  <i class="far fa-comment" style = "padding-right:10px;"></i>
                 <% end %>
-              </p>
-            <% end %>
-            <%= link_to objective_path(objective.id) do %>
-              <i class="far fa-comment"></i>
-            <% end %>
+                <% if objective.favorited_by?(current_user) %>
+                  <p>
+                    <%= link_to objective_favorites_path(objective.id), method: :delete do %>
+                      <i class="fas fa-thumbs-up"></i>
+                      <%= objective.favorites.count %>
+                    <% end %>
+                  </p>
+                    <% else %>
+                  <p>
+                    <%= link_to objective_favorites_path(objective.id), method: :post do %>
+                      <i class="far fa-thumbs-up"></i>
+                      <%= objective.favorites.count %>
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>

@@ -17,8 +17,4 @@ class Objective < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
-  def number_to_currency(money)
-    "#{money.to_s(:delimited, delimiter: ',')}円"
-  end
-
 end

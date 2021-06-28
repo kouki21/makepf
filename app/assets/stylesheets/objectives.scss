@@ -1,3 +1,33 @@
 // Place all the styles related to the objectives controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.objective_edit_button, .follow_do {
+  text-decoration:none !important;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 2px;
+  background: #709fa9;
+  transition: .3s;
+}
+
+.comment_delete_button, .objective_delete_button, .follow_out{
+  text-decoration:none !important;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 2px;
+  background: #CA807E;
+  transition: .3s;
+}
+
+.comment_button {
+  color: #fff;
+  background-color: #6c757d;
+  width: 100px;
+}
+
+.font-color{
+  text-decoration:none !important;
+  color: black;
+}
