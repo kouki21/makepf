@@ -29,6 +29,19 @@
               <table>
                 <tr>
                   <td>
+                    <% if objective.is_achievement == true %>
+                      <div style = "color: #339900;">
+                        新規
+                      </div>
+                    <% else %>
+                      <div style = "color: #9ba5a0;">
+                        貯金達成
+                      </div>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
                     <%= objective.user.name %>
                     <%= attachment_image_tag objective.user, :profile_image, size: "75x75", fallback: "no_image.jpg" %>
                   </td>
@@ -43,20 +56,7 @@
                   <td><%= objective.content %></td>
                 </tr>
                 <tr>
-                  <td>¥<%= objective.money %></td>
-                </tr>
-                <tr>
-                  <td>
-                    <% if objective.is_achievement == true %>
-                      <div style = "color: #339900;">
-                        新規
-                      </div>
-                    <% else %>
-                      <div style = "color: #9ba5a0;">
-                        貯金達成
-                      </div>
-                    <% end %>
-                  </td>
+                  <td><%=number_to_currency(objective.money, unit: "￥", strip_insignificant_zeros: true) %></td>
                 </tr>
               </table>
             </div>

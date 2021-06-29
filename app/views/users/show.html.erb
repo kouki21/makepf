@@ -47,7 +47,7 @@
               </p>
               <p><%= objective.title %></p>
               <p><%= objective.content %></p>
-              <p>¥<%= objective.money %></p>
+              <p><%=number_to_currency(objective.money, unit: "￥", strip_insignificant_zeros: true) %></p>
               <div style = "display: flex;">
                 <%= link_to objective_path(objective.id) do %>
                   <i class="far fa-comment" style = "padding-right:10px;"></i>

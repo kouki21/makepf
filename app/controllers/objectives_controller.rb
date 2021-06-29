@@ -6,7 +6,7 @@ class ObjectivesController < ApplicationController
 
   def index
     @objectives = Objective.all.order(id: "DESC")
-    @objective = Objective.find(Favorite.group(:objective_id).order('count(objective_id) desc').limit(3).pluck(:objective_id))
+    @objective = Objective.find(Favorite.group(:objective_id).order('count(objective_id) desc').limit(5).pluck(:objective_id))
     @user = current_user
   end
 

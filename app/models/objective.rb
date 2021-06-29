@@ -8,9 +8,6 @@ class Objective < ApplicationRecord
   has_many :objective_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  has_many :likes, dependent: :destroy
-  has_many :liked_users, through: :likes, source: :user
-
   attachment :image
 
   def favorited_by?(user)

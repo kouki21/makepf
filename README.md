@@ -22,8 +22,8 @@
 - 何か欲しい、買いたいものがあったり将来の為に貯金をしたいと思った時
 - 他人の投稿に対していいねやコメントで貯金を応援する時
 - 毎月貯金できた金額、貯金できた秘訣等を投稿する時
-				
-				
+
+
 
 ## 設計書
 - ER図：https://drive.google.com/file/d/1uTvkFKPjUCBbNnfSLwFDOVZ-5RDek5cN/view?usp=sharing
@@ -31,7 +31,7 @@
 - アプリケーション詳細設計書：https://docs.google.com/spreadsheets/d/1fL1FiC0_O2N5Gi2lDuQiUo2Oa4RXZUysXa-b08FDZUA/edit?usp=sharing
 
 ## チャレンジ要素一覧
-<https://docs.google.com/spreadsheets/d/1UgK-6l38k5T81XjcTIn7CHnGRkB_sBXS5xQWAVhWmks/edit#gid=0>
+https://docs.google.com/spreadsheets/d/1PKact-cIk7PMVmcPuG3V07bYTo47LMkbrH0d6EcIk9c/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)

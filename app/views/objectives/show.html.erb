@@ -52,7 +52,7 @@
         </p>
         <p><%= @objective.title %></p>
         <p><%= @objective.content %></p>
-        <p>¥<%= @objective.money %></p>
+        <p><%=number_to_currency(@objective.money, unit: "￥", strip_insignificant_zeros: true) %></p>
         <% if @objective.favorited_by?(current_user) %>
           <p>
             <%= link_to objective_favorites_path(@objective.id), method: :delete do %>

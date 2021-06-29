@@ -9,9 +9,6 @@ class User < ApplicationRecord
 
         has_many :favorites, dependent: :destroy
 
-        has_many :likes, dependent: :destroy
-        has_many :liked_objectives, through: :likes, source: :objective
-
         has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
         has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
@@ -32,9 +29,5 @@ class User < ApplicationRecord
 
         def following?(user)
           following_users.include?(user)
-        end
-
-        def all_following
-          Relationship.joins(followed: :objectives).select("objectives.*", "relationships.followed_id").where(follower_id: id).order("objectives.created_at DESC")
         end
 end

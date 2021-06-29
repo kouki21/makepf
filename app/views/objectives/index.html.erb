@@ -53,7 +53,7 @@
                     <td><%= objective.content %></td>
                   </tr>
                   <tr>
-                    <td>¥<%= objective.money %></td>
+                    <td><%=number_to_currency(objective.money, unit: "￥", strip_insignificant_zeros: true) %></td>
                   </tr>
                   <tr>
                     <td>
@@ -83,11 +83,11 @@
       <div class = "col-md-3" style = "border: 3px solid #e6e3dc;">
         <h4 style = "padding-top: 30px; border-bottom: 10px solid #e6e3dc;">いいね数ランキング</h4>
         <% @objective.each.with_index(1) do |objective,i| %>
-          <p>第<%= i %>位 いいね数：<%= objective.favorites.count %></p>
+          <p style = "font-size: 20px;">第<%= i %>位 いいね数：<%= objective.favorites.count %></p>
           <%= objective.user.name %>
           <%= attachment_image_tag objective.user, :profile_image, size: "10x10", fallback: "no_image.jpg" %>
           <p><%= objective.title %></p>
-          <%= attachment_image_tag objective, :image, size: "75x75", fallback: "noimage.png" %>
+          <%= attachment_image_tag objective, :image, size: "200x75", fallback: "noimage.png" %>
         <% end %>
       </div>
     </div>
