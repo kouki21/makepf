@@ -17,15 +17,15 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
 
-body{
+ body{
   background-color:#57728B;
-.container{
+ .container{
  	background-color:#F5F5F5;
   height: 100%;
  	margin: 0 auto 0 auto;
@@ -39,27 +39,27 @@ body{
   object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
 }
 
-.comment_profile_image{
+ .comment_profile_image{
   margin-top: 10px;
 }
 
-.button{
-display       : inline-block;
-border-radius : 20%;
-font-size     : 12pt;
-text-align    : center;
-cursor        : pointer;
-padding       : 9px 9px;
-background    : #999999;
-color         : #ffffff;
-line-height   : 1em;
-transition    : .3s;
-box-shadow    : 1px 1px 4px #666666;
-border        : 2px solid #999999;
+ .button{
+  display       : inline-block;
+  border-radius : 20%;
+  font-size     : 12pt;
+  text-align    : center;
+  cursor        : pointer;
+  padding       : 9px 9px;
+  background    : #999999;
+  color         : #ffffff;
+  line-height   : 1em;
+  transition    : .3s;
+  box-shadow    : 1px 1px 4px #666666;
+  border        : 2px solid #999999;
 }
 
-.button:hover {
-box-shadow    : none;
-color         : #999999;
-background    : #ffffff;
+ .button:hover {
+ box-shadow    : none;
+ color         : #999999;
+ background    : #ffffff;
 }

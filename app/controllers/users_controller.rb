@@ -2,11 +2,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @objective = Objective.find(params[:id])
   end
 
   def edit
     @user = User.find(params[:id])
+    @objective = @user.objective
   end
 
   def update

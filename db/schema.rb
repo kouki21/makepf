@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_123118) do
   create_table "objectives", force: :cascade do |t|
     t.integer "user_id"
     t.integer "money"
-    t.integer "image_id"
+    t.string "image_id"
     t.text "content"
     t.string "title"
     t.boolean "is_achievement", default: true
